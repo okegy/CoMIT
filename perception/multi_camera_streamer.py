@@ -106,7 +106,7 @@ def start_mjpeg_server(port=8088):
 
 
 class MultiCameraVisionEngine:
-    def __init__(self, source, model_path="yolo11n.pt", rois=None, broker="localhost", loop=True,
+    def __init__(self, source, model_path="yolo11n.pt", rois=None, broker="broker.emqx.io", loop=True,
                  allow_ping=True, port=8088):
         self.source = source
         self.rois = rois or DEFAULT_ROIS
@@ -358,7 +358,7 @@ if __name__ == "__main__":
     ap.add_argument("--source", default=os.path.join(ROOT, "assets", "video", "intersection_street.mp4"),
                     help="Video file path or '0' for webcam")
     ap.add_argument("--model", default="yolo11n.pt", help="Path to YOLO model weights (.pt)")
-    ap.add_argument("--broker", default="localhost")
+    ap.add_argument("--broker", default="broker.emqx.io")
     ap.add_argument("--port", type=int, default=8088, help="MJPEG HTTP stream port")
     ap.add_argument("--loop", action="store_true", default=True)
     ap.add_argument("--allow-ping", action="store_true", default=True)
@@ -368,3 +368,4 @@ if __name__ == "__main__":
     engine = MultiCameraVisionEngine(src, model_path=args.model, broker=args.broker, loop=args.loop,
                                      allow_ping=args.allow_ping, port=args.port)
     engine.run()
+

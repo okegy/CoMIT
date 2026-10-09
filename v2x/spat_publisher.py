@@ -8,7 +8,7 @@ import json
 import time
 import paho.mqtt.client as mqtt
 
-BROKER = "localhost"
+BROKER = "broker.emqx.io"
 TOPIC_SPAT = "v2x/spat/jn1"
 TOPIC_LANE = "v2x/lane_state"
 TOPIC_EMERG = "v2x/alert/emergency"
@@ -100,3 +100,4 @@ class SpatPublisher:
         """Connected-vehicle feed: distance to stop line, time-to-green,
         GLOSA advisory speed — consumed by the in-vehicle cluster UI."""
         self.client.publish(TOPIC_EGO, json.dumps(ego), qos=0)
+

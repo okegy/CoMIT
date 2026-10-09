@@ -56,7 +56,7 @@ export default function NavMode({ ego, emergency, spat, hazard, lanes }) {
       {/* Google Maps Style Top Navigation Bar */}
       <div className="absolute top-4 left-4 right-4 z-30 flex flex-wrap gap-3">
         {/* Next Maneuver Green Banner */}
-        <div className="bg-[#0f9d58] shadow-2xl shadow-emerald-950/60 rounded-2xl px-5 py-3.5 flex-1 flex items-center justify-between text-white border border-emerald-400/30">
+        <div className="bg-[#0f9d58] shadow-2xl shadow-amber-950/60 rounded-2xl px-5 py-3.5 flex-1 flex items-center justify-between text-white border border-amber-400/30">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center border border-white/20">
               <Navigation2 size={28} className="-rotate-45 text-white" />
@@ -65,26 +65,26 @@ export default function NavMode({ ego, emergency, spat, hazard, lanes }) {
               <div className="text-2xl font-black tracking-tight digits">
                 {Math.round(distanceToJunction)} m
               </div>
-              <div className="text-emerald-100 text-xs font-semibold">
+              <div className="text-amber-100 text-xs font-semibold">
                 Proceed straight through <span className="font-bold text-white">Anna Salai · JN-1</span>
               </div>
             </div>
           </div>
-          <div className="hidden sm:flex items-center gap-2 bg-emerald-900/50 px-3 py-1.5 rounded-xl border border-emerald-400/20 text-xs">
-            <Radio size={14} className="text-emerald-300 animate-pulse" />
-            <span className="font-bold text-emerald-200">V2X LIVE</span>
+          <div className="hidden sm:flex items-center gap-2 bg-amber-900/50 px-3 py-1.5 rounded-xl border border-amber-400/20 text-xs">
+            <Radio size={14} className="text-amber-300 animate-pulse" />
+            <span className="font-bold text-amber-200">V2X LIVE</span>
           </div>
         </div>
 
         {/* GLOSA Smart Speed Banner */}
         <div className="bg-slate-900/90 backdrop-blur-md border border-slate-700/80 shadow-2xl rounded-2xl px-4 py-3 min-w-[170px] text-center text-white flex flex-col justify-center">
           <div className="text-slate-400 text-[10px] font-bold uppercase tracking-wider flex items-center justify-center gap-1">
-            <Zap size={12} className="text-sky-400" /> GLOSA Advisory
+            <Zap size={12} className="text-orange-400" /> GLOSA Advisory
           </div>
-          <div className="text-2xl font-black digits text-sky-400 mt-0.5">
+          <div className="text-2xl font-black digits text-orange-400 mt-0.5">
             {glosaSpeed} <span className="text-xs font-semibold text-slate-400 font-sans">km/h</span>
           </div>
-          <div className="text-[9.5px] text-emerald-400 font-semibold mt-0.5">
+          <div className="text-[9.5px] text-amber-400 font-semibold mt-0.5">
             Catch Green Wave
           </div>
         </div>
@@ -156,7 +156,7 @@ export default function NavMode({ ego, emergency, spat, hazard, lanes }) {
               <polygon points="0,-10 10,8 -10,8" fill="#f97316" stroke="#fff" strokeWidth="1.5" />
             </g>
 
-            {/* Ego Connected Vehicle (Google Navigation Blue Puck + Heading Arrow) */}
+            {/* Ego Connected Vehicle (Google Navigation orange Puck + Heading Arrow) */}
             <motion.g transform={`translate(225, ${640 - (navProgress % 100) * 4.2})`} className="drop-shadow-2xl">
               {/* Outer Accuracy Circle */}
               <circle cx="0" cy="0" r="28" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" strokeWidth="1.5" />
@@ -200,16 +200,16 @@ export default function NavMode({ ego, emergency, spat, hazard, lanes }) {
                 initial={{ y: 40, opacity: 0, scale: 0.92 }}
                 animate={{ y: 0, opacity: 1, scale: 1 }}
                 exit={{ y: 30, opacity: 0, scale: 0.92 }}
-                className="w-full max-w-md bg-slate-900/95 backdrop-blur-xl border border-sky-500/40 shadow-2xl rounded-2xl p-4 pointer-events-auto"
+                className="w-full max-w-md bg-slate-900/95 backdrop-blur-xl border border-orange-500/40 shadow-2xl rounded-2xl p-4 pointer-events-auto"
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <div className={`w-3.5 h-3.5 rounded-full ${isRed ? 'bg-red-500 animate-pulse' : 'bg-emerald-400'}`} />
+                    <div className={`w-3.5 h-3.5 rounded-full ${isRed ? 'bg-red-500 animate-pulse' : 'bg-amber-400'}`} />
                     <span className="text-xs font-bold text-white uppercase tracking-wider">
                       Next Signal in {Math.round(distanceToJunction)}m · JN-1 Anna Nagar
                     </span>
                   </div>
-                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-slate-800 text-sky-300 border border-slate-700">
+                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-slate-800 text-orange-300 border border-slate-700">
                     SPaT Live
                   </span>
                 </div>
@@ -219,11 +219,11 @@ export default function NavMode({ ego, emergency, spat, hazard, lanes }) {
                       {isRed ? "Signal is RED — Approaching Stop" : "Signal is GREEN — Maintain Pace"}
                     </div>
                     <div className="text-xs text-slate-400 mt-0.5">
-                      Recommended GLOSA Speed: <span className="text-sky-400 font-bold">{glosaSpeed} km/h</span>
+                      Recommended GLOSA Speed: <span className="text-orange-400 font-bold">{glosaSpeed} km/h</span>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-black text-emerald-400 font-mono digits">
+                    <div className="text-2xl font-black text-amber-400 font-mono digits">
                       {signalCountdown}s
                     </div>
                     <div className="text-[10px] text-slate-400 uppercase font-semibold">Change In</div>
@@ -313,7 +313,7 @@ export default function NavMode({ ego, emergency, spat, hazard, lanes }) {
           <div className="px-3.5 py-2 bg-slate-800/80 rounded-xl border border-slate-700 text-xs font-bold flex items-center gap-2 text-slate-300">
             <MapPin size={15} className="text-red-400" /> JN-1 Corridor
           </div>
-          <div className="px-4 py-2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-xl text-xs font-bold flex items-center gap-1.5">
+          <div className="px-4 py-2 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-bold flex items-center gap-1.5">
             <Sparkles size={14} /> AI Nav Synced
           </div>
         </div>
@@ -321,3 +321,4 @@ export default function NavMode({ ego, emergency, spat, hazard, lanes }) {
     </div>
   )
 }
+

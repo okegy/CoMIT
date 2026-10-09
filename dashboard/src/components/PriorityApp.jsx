@@ -21,7 +21,7 @@ export default function PriorityApp({ emergency, spat, ego, onPing, tokenReady }
         {/* status bar */}
         <div className="flex items-center justify-between px-6 py-2 text-[10px] text-slate-400 bg-slate-950">
           <span className="digits">16:24</span>
-          <div className="flex items-center gap-1.5"><Radio size={11} className="text-emerald-400" /> CoMIT-Link</div>
+          <div className="flex items-center gap-1.5"><Radio size={11} className="text-amber-400" /> CoMIT-Link</div>
           <span className="digits">5G ▮▮▮</span>
         </div>
 
@@ -34,7 +34,7 @@ export default function PriorityApp({ emergency, spat, ego, onPing, tokenReady }
               <div className="text-white font-bold leading-tight">CoMIT Priority</div>
               <div className="text-[11px] text-slate-400">Emergency Green Corridor · AMB-001</div>
             </div>
-            <ShieldCheck size={18} className={tokenReady ? 'text-emerald-400 ml-auto' : 'text-slate-600 ml-auto'} />
+            <ShieldCheck size={18} className={tokenReady ? 'text-amber-400 ml-auto' : 'text-slate-600 ml-auto'} />
           </div>
 
           {/* corridor status */}
@@ -44,7 +44,7 @@ export default function PriorityApp({ emergency, spat, ego, onPing, tokenReady }
               <motion.div key={emergency?.event || 'idle'}
                 initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                 className={`text-sm font-bold ${
-                  active ? 'text-red-300' : cleared ? 'text-emerald-300' : 'text-slate-300'}`}>
+                  active ? 'text-red-300' : cleared ? 'text-amber-300' : 'text-slate-300'}`}>
                 {active && (emergency.event === 'PREEMPT'
                   ? `Green corridor ACTIVE · approach ${emergency.approach} · ETA ${emergency.eta}s`
                   : 'Priority ping accepted — corridor arming…')}
@@ -73,7 +73,7 @@ export default function PriorityApp({ emergency, spat, ego, onPing, tokenReady }
               )}
             </div>
             <div className="text-right">
-              <div className="digits text-3xl font-black text-sky-300">
+              <div className="digits text-3xl font-black text-orange-300">
                 {st?.event_state === 6 ? Math.ceil(st.min_end_time) : ego?.time_to_green != null ? Math.ceil(ego.time_to_green) : '--'}
               </div>
               <div className="text-[10px] text-slate-500">sec</div>
@@ -83,7 +83,7 @@ export default function PriorityApp({ emergency, spat, ego, onPing, tokenReady }
           {/* speed */}
           <div className="glass px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2 text-slate-300">
-              <Gauge size={15} className="text-sky-300" /> Current speed
+              <Gauge size={15} className="text-orange-300" /> Current speed
             </div>
             <div className="digits text-2xl font-bold text-white">
               {ego?.speed_kmh != null ? ego.speed_kmh.toFixed(0) : '--'} <span className="text-xs text-slate-500">km/h</span>
@@ -112,3 +112,4 @@ export default function PriorityApp({ emergency, spat, ego, onPing, tokenReady }
     </div>
   )
 }
+

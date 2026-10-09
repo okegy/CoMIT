@@ -30,9 +30,9 @@
   --glass: rgba(18, 28, 46, 0.82);
   --glass-border: rgba(56, 189, 248, 0.28);
   --accent: #38bdf8;
-  --signal-green: #00ff88;
+  --signal-green: #ffb800;
   --signal-yellow: #ffb800;
-  --signal-red: #ff2a5f;
+  --signal-red: #ff7f50;
 }
 
 html, body {
@@ -145,21 +145,21 @@ body {
 
 /* High-Visibility Traffic Signal Neon Glows */
 .glow-signal-green {
-  filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.85));
+  filter: drop-shadow(0 0 10px rgba(255, 184, 0, 0.85));
 }
 .glow-signal-yellow {
   filter: drop-shadow(0 0 10px rgba(255, 184, 0, 0.85));
 }
-.glow-signal-red {
-  filter: drop-shadow(0 0 12px rgba(255, 42, 95, 0.95));
+.glow-signal-coral {
+  filter: drop-shadow(0 0 12px rgba(255, 127, 80, 0.95));
 }
-.glow-green {
+.glow-amber {
   filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.8));
 }
 .glow-amber {
   filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.8));
 }
-.glow-red {
+.glow-coral {
   filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.9));
 }
 
@@ -236,3 +236,4 @@ body {
   animation: scan 5s linear infinite;
   pointer-events: none;
 }
+

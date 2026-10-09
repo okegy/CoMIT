@@ -9,9 +9,9 @@ export function KpiCards({ kpi }) {
       icon: Clock, 
       label: 'Avg Wait Reduction', 
       value: kpi?.wait_reduction_pct != null ? `${kpi.wait_reduction_pct.toFixed(1)}%` : '—', 
-      color: 'text-sky-300 drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]', 
-      borderColor: 'border-sky-500/30',
-      bgColor: 'bg-sky-950/30'
+      color: 'text-orange-300 drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]', 
+      borderColor: 'border-orange-500/30',
+      bgColor: 'bg-orange-950/30'
     },
     { 
       icon: Car, 
@@ -25,17 +25,17 @@ export function KpiCards({ kpi }) {
       icon: Leaf, 
       label: 'CO2 Saved', 
       value: kpi?.co2_saved_kg != null ? `${kpi.co2_saved_kg.toFixed(2)} kg` : '—', 
-      color: 'text-[#00ff88] drop-shadow-[0_0_8px_rgba(0,255,136,0.6)]', 
-      borderColor: 'border-emerald-500/30',
-      bgColor: 'bg-emerald-950/30'
+      color: 'text-[#ffb800] drop-shadow-[0_0_8px_rgba(255,184,0,0.6)]', 
+      borderColor: 'border-amber-500/30',
+      bgColor: 'bg-amber-950/30'
     },
     { 
       icon: Radio, 
       label: 'RL Confidence', 
       value: kpi?.rl_confidence != null ? `${(kpi.rl_confidence * 100).toFixed(1)}%` : (kpi?.controller ? 'rule-based' : '—'), 
-      color: 'text-purple-300 drop-shadow-[0_0_8px_rgba(216,180,254,0.5)]', 
-      borderColor: 'border-purple-500/30',
-      bgColor: 'bg-purple-950/30'
+      color: 'text-rose-300 drop-shadow-[0_0_8px_rgba(216,180,254,0.5)]', 
+      borderColor: 'border-rose-500/30',
+      bgColor: 'bg-rose-950/30'
     },
   ]
   return (
@@ -75,15 +75,15 @@ export function QueueChart({ lanes }) {
           <Tooltip contentStyle={{ background: 'rgba(15,23,42,0.95)', border: '1px solid #38bdf8', borderRadius: 10, fontSize: 12, fontWeight: 'bold' }} />
           <Bar dataKey="queue" radius={[6, 6, 0, 0]} minPointSize={4}>
             {data.map((d, i) => (
-              <Cell key={i} fill={d.queue > 8 ? '#ff2a5f' : d.queue > 3 ? '#ffb800' : '#00ff88'} />
+              <Cell key={i} fill={d.queue > 8 ? '#ff7f50' : d.queue > 3 ? '#ffb800' : '#ffb800'} />
             ))}
           </Bar>
         </BarChart>
       </ResponsiveContainer>
       <div className="flex items-center justify-between text-[10px] font-semibold text-slate-400 mt-1 pt-1 border-t border-slate-800">
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-[#00ff88]" /> Normal (0-3)</span>
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-[#ffb800]" /> Normal (0-3)</span>
         <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-[#ffb800]" /> Moderate (4-8)</span>
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-[#ff2a5f]" /> Congested (9+)</span>
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded bg-[#ff7f50]" /> Congested (9+)</span>
       </div>
     </div>
   )
@@ -115,9 +115,9 @@ export function EmergencyBanner({ emergency, hazard }) {
   
   return (
     <motion.div initial={{ opacity: 0, y: -14 }} animate={{ opacity: 1, y: 0 }}
-      className={`rounded-2xl border-2 ${isPreempt ? 'border-red-400 bg-gradient-to-r from-red-950/90 via-rose-950/80 to-slate-950 shadow-2xl shadow-red-950/80 animate-pulse' : 'border-emerald-400 bg-emerald-950/80'} p-4 flex items-center gap-3.5`}>
-      <div className={`w-11 h-11 rounded-xl ${isPreempt ? 'bg-red-500/20 border border-red-400' : 'bg-emerald-500/20 border border-emerald-400'} flex items-center justify-center shrink-0`}>
-        <Ambulance className={isPreempt ? 'text-red-400' : 'text-emerald-400'} size={26} />
+      className={`rounded-2xl border-2 ${isPreempt ? 'border-red-400 bg-gradient-to-r from-red-950/90 via-rose-950/80 to-slate-950 shadow-2xl shadow-red-950/80 animate-pulse' : 'border-amber-400 bg-amber-950/80'} p-4 flex items-center gap-3.5`}>
+      <div className={`w-11 h-11 rounded-xl ${isPreempt ? 'bg-red-500/20 border border-red-400' : 'bg-amber-500/20 border border-amber-400'} flex items-center justify-center shrink-0`}>
+        <Ambulance className={isPreempt ? 'text-red-400' : 'text-amber-400'} size={26} />
       </div>
       <div className="flex-1">
         <div className="font-black text-white text-sm flex items-center gap-2 uppercase tracking-wide">
@@ -154,7 +154,7 @@ export function VoiceConsole({ voice, events, spat }) {
         </h3>
         <div className="flex items-center gap-2">
           <button onClick={() => setEnabled(e => !e)}
-            className={`flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg border transition-all ${enabled ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-slate-800 text-slate-400 border-slate-700'}`}>
+            className={`flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg border transition-all ${enabled ? 'bg-amber-500/20 text-amber-300 border-amber-500/40' : 'bg-slate-800 text-slate-400 border-slate-700'}`}>
             {enabled ? <Volume2 size={12} /> : <VolumeX size={12} />} {enabled ? 'AUDIO ON' : 'MUTED'}
           </button>
         </div>
@@ -169,7 +169,7 @@ export function VoiceConsole({ voice, events, spat }) {
               தமிழ் ▶
             </button>
             <button onClick={() => new Audio(voice.en).play().catch(() => {})}
-              className="flex-1 text-xs py-1.5 rounded-lg bg-sky-500/20 text-sky-200 hover:bg-sky-500/30 border border-sky-500/40 font-bold transition-all cursor-pointer">
+              className="flex-1 text-xs py-1.5 rounded-lg bg-orange-500/20 text-orange-200 hover:bg-orange-500/30 border border-orange-500/40 font-bold transition-all cursor-pointer">
               English ▶
             </button>
           </div>
@@ -178,7 +178,7 @@ export function VoiceConsole({ voice, events, spat }) {
       
       <div className="mb-2">
         <button onClick={speakNav}
-          className="w-full flex items-center justify-center gap-2 text-xs py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white border border-purple-400 shadow-lg shadow-purple-900/30 font-black uppercase tracking-wider transition-all cursor-pointer">
+          className="w-full flex items-center justify-center gap-2 text-xs py-2 rounded-xl bg-gradient-to-r from-rose-600 to-rose-600 hover:from-rose-500 hover:to-rose-500 text-white border border-rose-400 shadow-lg shadow-rose-900/30 font-black uppercase tracking-wider transition-all cursor-pointer">
           <Zap size={14} /> Synthesize Sync Nav Audio
         </button>
       </div>
@@ -202,14 +202,14 @@ export function FleetInspector({ vehicles }) {
   const TYPE_STYLE = {
     car: { c: '#38bdf8', label: 'car' }, moto: { c: '#facc15', label: 'moto' },
     bus: { c: '#34d399', label: 'bus' }, truck: { c: '#cbd5e1', label: 'truck' },
-    amb: { c: '#ff2a5f', label: 'ambulance' },
+    amb: { c: '#ff7f50', label: 'ambulance' },
   }
 
   return (
     <div className="card border-2 border-slate-700/60 shadow-xl">
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-xs font-black text-white uppercase tracking-wider">Fleet Instance Inspector</h3>
-        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30">
+        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30">
           {list.length} Tracked Instances
         </span>
       </div>
@@ -240,13 +240,13 @@ export function FleetInspector({ vehicles }) {
 export function SafetyPanel({ lastDecision }) {
   const d = lastDecision
   return (
-    <div className="card border-2 border-emerald-500/40 bg-gradient-to-br from-emerald-950/40 via-slate-900 to-slate-950 shadow-xl">
+    <div className="card border-2 border-amber-500/40 bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-950 shadow-xl">
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
-          <ShieldCheck className="text-[#00ff88]" size={16} />
+          <ShieldCheck className="text-[#ffb800]" size={16} />
           Deterministic Safety Shield
         </h3>
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-[#00ff88] border border-emerald-400/40">
+        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-[#ffb800] border border-amber-400/40">
           ZERO CONFLICTS
         </span>
       </div>
@@ -257,10 +257,10 @@ export function SafetyPanel({ lastDecision }) {
         </div>
         <div className="flex justify-between text-slate-300">
           <span>Safety Vetted Action:</span>
-          <span className="text-[#00ff88] font-black">{d?.executed ?? '1 (NS Green)'}</span>
+          <span className="text-[#ffb800] font-black">{d?.executed ?? '1 (NS Green)'}</span>
         </div>
         <div className="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
-          <CheckCircle2 size={12} className="text-[#00ff88]" />
+          <CheckCircle2 size={12} className="text-[#ffb800]" />
           <span>{d?.reason || 'Conflict matrix & min-green verified safely'}</span>
         </div>
       </div>
@@ -273,19 +273,19 @@ export function GlosaCard({ spat }) {
   const isEmergency = spat?.mode === 'EMERGENCY'
   
   return (
-    <div className="card border-2 border-sky-500/40 shadow-xl">
+    <div className="card border-2 border-orange-500/40 shadow-xl">
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
-          <Zap className="text-sky-400" size={15} />
+          <Zap className="text-orange-400" size={15} />
           GLOSA · Connected Vehicle Feed
         </h3>
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30 font-mono">
+        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30 font-mono">
           J2735 SPaT
         </span>
       </div>
       <div className="flex items-center justify-between bg-slate-950 p-3 rounded-xl border border-slate-800">
         <div>
-          <div className="digits text-3xl font-black text-sky-400">
+          <div className="digits text-3xl font-black text-orange-400">
             {isEmergency ? '0' : (activeGreen ? '40' : '32')} <span className="text-xs font-semibold text-slate-400 font-sans">km/h</span>
           </div>
           <div className="text-xs font-bold text-slate-300 mt-0.5">
@@ -302,3 +302,4 @@ export function GlosaCard({ spat }) {
     </div>
   )
 }
+

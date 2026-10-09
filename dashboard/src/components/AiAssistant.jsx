@@ -145,19 +145,19 @@ Try asking:
           onClick={() => setIsOpen(!isOpen)}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.94 }}
-          className="relative group p-3.5 rounded-full bg-gradient-to-r from-sky-500 via-blue-600 to-purple-600 text-white shadow-2xl shadow-sky-500/40 border border-sky-300/40 flex items-center justify-center cursor-pointer"
+          className="relative group p-3.5 rounded-full bg-gradient-to-r from-orange-500 via-orange-600 to-rose-600 text-white shadow-2xl shadow-orange-500/40 border border-orange-300/40 flex items-center justify-center cursor-pointer"
         >
           {isOpen ? (
             <X size={24} />
           ) : (
             <>
               <Bot size={24} className="animate-pulse" />
-              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-slate-900" />
+              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-amber-400 border-2 border-slate-900" />
             </>
           )}
           {!isOpen && (
             <span className="absolute right-14 whitespace-nowrap bg-slate-900/90 backdrop-blur text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-700/80 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl flex items-center gap-1.5">
-              <Sparkles size={13} className="text-sky-400" /> Ask CoMIT AI Copilot
+              <Sparkles size={13} className="text-orange-400" /> Ask CoMIT AI Copilot
             </span>
           )}
         </motion.button>
@@ -171,20 +171,20 @@ Try asking:
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-            className="fixed bottom-22 right-6 z-50 w-[92vw] sm:w-[420px] h-[580px] bg-slate-950/95 backdrop-blur-2xl border border-sky-500/30 rounded-3xl shadow-2xl flex flex-col overflow-hidden font-sans select-none"
+            className="fixed bottom-22 right-6 z-50 w-[92vw] sm:w-[420px] h-[580px] bg-slate-950/95 backdrop-blur-2xl border border-orange-500/30 rounded-3xl shadow-2xl flex flex-col overflow-hidden font-sans select-none"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-slate-900 via-sky-950/80 to-slate-900 px-5 py-3.5 border-b border-slate-800/80 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-slate-900 via-orange-950/80 to-slate-900 px-5 py-3.5 border-b border-slate-800/80 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-purple-600 p-0.5 flex items-center justify-center shadow-lg shadow-sky-500/20">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-400 to-rose-600 p-0.5 flex items-center justify-center shadow-lg shadow-orange-500/20">
                   <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                    <Bot size={18} className="text-sky-400" />
+                    <Bot size={18} className="text-orange-400" />
                   </div>
                 </div>
                 <div>
                   <h3 className="text-sm font-black text-white flex items-center gap-1.5">
                     CoMIT AI Copilot
-                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono font-bold border border-emerald-500/30">
+                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono font-bold border border-amber-500/30">
                       LIVE
                     </span>
                   </h3>
@@ -210,7 +210,7 @@ Try asking:
                 <button
                   key={i}
                   onClick={() => handleSend(chip.prompt)}
-                  className="shrink-0 px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-sky-500/20 text-slate-300 hover:text-sky-300 border border-slate-700/60 transition-colors font-medium"
+                  className="shrink-0 px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-orange-500/20 text-slate-300 hover:text-orange-300 border border-slate-700/60 transition-colors font-medium"
                 >
                   {chip.label}
                 </button>
@@ -225,21 +225,21 @@ Try asking:
                   className={`flex gap-2.5 ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   {m.sender === 'ai' && (
-                    <div className="w-7 h-7 rounded-lg bg-sky-500/20 border border-sky-400/30 flex items-center justify-center shrink-0 mt-0.5">
-                      <Sparkles size={14} className="text-sky-300" />
+                    <div className="w-7 h-7 rounded-lg bg-orange-500/20 border border-orange-400/30 flex items-center justify-center shrink-0 mt-0.5">
+                      <Sparkles size={14} className="text-orange-300" />
                     </div>
                   )}
                   <div
                     className={`max-w-[82%] px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed ${
                       m.sender === 'user'
-                        ? 'bg-gradient-to-r from-sky-600 to-blue-600 text-white rounded-tr-none shadow-lg shadow-sky-600/20'
+                        ? 'bg-gradient-to-r from-orange-600 to-orange-600 text-white rounded-tr-none shadow-lg shadow-orange-600/20'
                         : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-tl-none whitespace-pre-line'
                     }`}
                   >
                     {m.text}
                     <div
                       className={`text-[9px] mt-1 font-mono ${
-                        m.sender === 'user' ? 'text-sky-200 text-right' : 'text-slate-500 text-left'
+                        m.sender === 'user' ? 'text-orange-200 text-right' : 'text-slate-500 text-left'
                       }`}
                     >
                       {m.time}
@@ -250,13 +250,13 @@ Try asking:
 
               {isTyping && (
                 <div className="flex gap-2.5 items-center text-xs text-slate-400">
-                  <div className="w-7 h-7 rounded-lg bg-sky-500/20 border border-sky-400/30 flex items-center justify-center shrink-0">
-                    <Bot size={14} className="text-sky-300 animate-spin" />
+                  <div className="w-7 h-7 rounded-lg bg-orange-500/20 border border-orange-400/30 flex items-center justify-center shrink-0">
+                    <Bot size={14} className="text-orange-300 animate-spin" />
                   </div>
                   <div className="bg-slate-900 border border-slate-800 px-3.5 py-2 rounded-2xl text-slate-400 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-bounce" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-bounce [animation-delay:0.2s]" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-bounce [animation-delay:0.4s]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-bounce" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-bounce [animation-delay:0.2s]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-bounce [animation-delay:0.4s]" />
                   </div>
                 </div>
               )}
@@ -271,12 +271,12 @@ Try asking:
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Ask CoMIT AI (e.g. current queues, safety, video feed)..."
-                className="flex-1 bg-slate-950 border border-slate-800 focus:border-sky-500 px-3.5 py-2 rounded-xl text-xs text-white placeholder-slate-500 outline-none transition-colors"
+                className="flex-1 bg-slate-950 border border-slate-800 focus:border-orange-500 px-3.5 py-2 rounded-xl text-xs text-white placeholder-slate-500 outline-none transition-colors"
               />
               <button
                 onClick={() => handleSend()}
                 disabled={!input.trim()}
-                className="w-9 h-9 rounded-xl bg-sky-500 hover:bg-sky-400 disabled:opacity-40 text-white flex items-center justify-center transition-all shadow-lg shadow-sky-500/30 cursor-pointer"
+                className="w-9 h-9 rounded-xl bg-orange-500 hover:bg-orange-400 disabled:opacity-40 text-white flex items-center justify-center transition-all shadow-lg shadow-orange-500/30 cursor-pointer"
               >
                 <Send size={15} />
               </button>
@@ -287,3 +287,4 @@ Try asking:
     </>
   )
 }
+

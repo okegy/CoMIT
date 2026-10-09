@@ -80,7 +80,7 @@ export default function App() {
     push('STOP command sent — simulation shutting down', 'text-red-300')
   }
 
-  const statusColor = status === 'connected' ? 'bg-emerald-400' : 'bg-red-400'
+  const statusColor = status === 'connected' ? 'bg-amber-400' : 'bg-red-400'
 
   return (
     <div className="cursor-none-desktop">
@@ -90,12 +90,12 @@ export default function App() {
 
       <div className="max-w-7xl mx-auto p-4 space-y-4">
         <motion.header initial="hidden" animate="show" variants={fadeUp}
-          className="glass-strong glass-sheen flex flex-wrap items-center justify-between gap-4 px-6 py-3.5 border-2 border-sky-400/30 shadow-2xl">
+          className="glass-strong glass-sheen flex flex-wrap items-center justify-between gap-4 px-6 py-3.5 border-2 border-orange-400/30 shadow-2xl">
           {/* Brand Logo & Title */}
           <div className="flex items-center gap-3.5 shrink-0">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-400 via-sky-500 to-blue-600 p-0.5 flex items-center justify-center shadow-lg shadow-sky-500/30">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 via-orange-500 to-orange-600 p-0.5 flex items-center justify-center shadow-lg shadow-orange-500/30">
               <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                <Activity className="text-emerald-400 animate-pulse" size={22} />
+                <Activity className="text-amber-400 animate-pulse" size={22} />
               </div>
             </div>
             <div className="flex flex-col justify-center">
@@ -103,7 +103,7 @@ export default function App() {
                 <h1 className="text-2xl font-black tracking-tight text-white digits drop-shadow">
                   CoMIT
                 </h1>
-                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/40">
+                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40">
                   AI V2X CORE
                 </span>
               </div>
@@ -129,7 +129,7 @@ export default function App() {
                   className={`relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     tab === t.id ? 'text-white' : 'text-slate-300 hover:text-white hover:bg-slate-800/60'}`}>
                   {tab === t.id && (
-                    <motion.div layoutId="nav-pill" className="absolute inset-0 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 border border-sky-300 shadow-lg shadow-sky-500/40"
+                    <motion.div layoutId="nav-pill" className="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 border border-orange-300 shadow-lg shadow-orange-500/40"
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }} />
                   )}
                   <t.icon size={14} className="relative z-10" />
@@ -141,13 +141,13 @@ export default function App() {
             {/* Status & Language Selectors */}
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-2 text-xs font-bold text-slate-200 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-700/60 shadow">
-                <span className={`w-2.5 h-2.5 rounded-full ${status === 'connected' ? 'bg-emerald-400 shadow-[0_0_8px_#00ff88]' : 'bg-red-500 shadow-[0_0_8px_#ff2a5f]'} animate-pulse`} />
+                <span className={`w-2.5 h-2.5 rounded-full ${status === 'connected' ? 'bg-amber-400 shadow-[0_0_8px_#ffb800]' : 'bg-red-500 shadow-[0_0_8px_#ff7f50]'} animate-pulse`} />
                 <span className="font-mono">{status === 'connected' ? 'LIVE MQTT' : 'OFFLINE'}</span>
               </div>
               <div className="flex items-center gap-1 bg-slate-950/80 p-1 rounded-xl border border-slate-700/60">
                 {['en', 'fr', 'ta'].map(l => (
                   <button key={l} onClick={() => setLang(l)}
-                    className={`px-2.5 py-1 text-[10.5px] font-black uppercase rounded-lg transition-all cursor-pointer ${lang === l ? 'bg-gradient-to-r from-emerald-500 to-sky-500 text-slate-950 font-black shadow-md shadow-emerald-500/30' : 'text-slate-400 hover:text-white'}`}>
+                    className={`px-2.5 py-1 text-[10.5px] font-black uppercase rounded-lg transition-all cursor-pointer ${lang === l ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black shadow-md shadow-amber-500/30' : 'text-slate-400 hover:text-white'}`}>
                     {l}
                   </button>
                 ))}
@@ -262,8 +262,11 @@ export default function App() {
         </motion.div>
 
         {/* Floating AI Chat Assistant Toggle */}
+        <ClickParticles />
         <AiAssistant spat={spat} lanes={lanes} kpi={kpi} emergency={emergency} hazard={hazard} onPublish={publish} />
       </div>
     </div>
   )
 }
+
+

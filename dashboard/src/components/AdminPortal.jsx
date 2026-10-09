@@ -43,7 +43,7 @@ export default function AdminPortal() {
         <div className="card h-full flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wide flex items-center gap-2">
-              <ShieldAlert size={16} className="text-sky-400" /> Live Enforcement Feed
+              <ShieldAlert size={16} className="text-orange-400" /> Live Enforcement Feed
             </h3>
             <span className="text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded-full border border-red-500/30 flex items-center gap-1 animate-pulse">
               <div className="w-1.5 h-1.5 rounded-full bg-red-400" /> LIVE CAPTURE
@@ -85,7 +85,7 @@ export default function AdminPortal() {
                       </td>
                       <td className="py-3 text-slate-300 digits">{v.speed} km/h</td>
                       <td className="py-3">
-                        <button className="text-xs bg-sky-500/20 text-sky-300 hover:bg-sky-500/40 px-3 py-1 rounded transition-colors">
+                        <button className="text-xs bg-orange-500/20 text-orange-300 hover:bg-orange-500/40 px-3 py-1 rounded transition-colors">
                           Review
                         </button>
                       </td>
@@ -112,7 +112,7 @@ export default function AdminPortal() {
             >
               <div className="w-full h-32 bg-slate-900 rounded-lg border border-slate-700 flex items-center justify-center relative overflow-hidden mb-4 group">
                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=600')] bg-cover bg-center opacity-40 mix-blend-luminosity grayscale group-hover:grayscale-0 transition-all duration-500" />
-                <div className="absolute inset-0 bg-sky-900/20" />
+                <div className="absolute inset-0 bg-orange-900/20" />
                 
                 {/* AI Bounding Box Overlay */}
                 <div className="absolute w-24 h-16 border-2 border-red-500/70 rounded bg-red-500/10 flex items-end justify-center pb-1">
@@ -137,7 +137,7 @@ export default function AdminPortal() {
                 </div>
                 <div className="flex justify-between border-b border-slate-700/50 pb-1">
                   <span className="text-slate-500">Plate (ANPR)</span>
-                  <span className="font-mono font-bold text-emerald-400">{selected.plate}</span>
+                  <span className="font-mono font-bold text-amber-400">{selected.plate}</span>
                 </div>
                 <div className="flex justify-between border-b border-slate-700/50 pb-1">
                   <span className="text-slate-500">Recorded Speed</span>
@@ -148,7 +148,7 @@ export default function AdminPortal() {
               </div>
               
               <div className="mt-auto grid grid-cols-2 gap-2 pt-4">
-                <button className="flex items-center justify-center gap-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 py-2 rounded-lg text-xs font-bold uppercase transition-colors">
+                <button className="flex items-center justify-center gap-2 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 py-2 rounded-lg text-xs font-bold uppercase transition-colors">
                   <CheckCircle size={14} /> Issue Ticket
                 </button>
                 <button className="flex items-center justify-center gap-2 bg-slate-700/50 hover:bg-slate-700/80 text-slate-300 border border-slate-600 py-2 rounded-lg text-xs font-bold uppercase transition-colors">
@@ -174,3 +174,4 @@ export default function AdminPortal() {
     </div>
   )
 }
+

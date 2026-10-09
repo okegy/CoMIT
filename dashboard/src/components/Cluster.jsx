@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Battery, Signal as SignalIcon, Bluetooth, Thermometer, Volume2,
+import { Battery, Signal as SignalIcon, orangetooth, Thermometer, Volume2,
          Radio, TriangleAlert, Coins } from 'lucide-react'
 
 const polar = (cx, cy, r, deg) => {
@@ -30,9 +30,9 @@ function Gauge({ value, max, major, redFrom, centerTop, centerMain, centerSub,
     ticks.push(
       <g key={v}>
         <line x1={x1} y1={y1} x2={x2} y2={y2}
-          stroke={red ? '#ff2a5f' : '#94a3b8'} strokeWidth={2} />
+          stroke={red ? '#ff7f50' : '#94a3b8'} strokeWidth={2} />
         <text x={tx} y={ty} textAnchor="middle" dominantBaseline="middle"
-          fontSize={10} fill={red ? '#ff2a5f' : '#cbd5e1'} fontFamily="Rajdhani" fontWeight={600}>
+          fontSize={10} fill={red ? '#ff7f50' : '#cbd5e1'} fontFamily="Rajdhani" fontWeight={600}>
           {v}
         </text>
       </g>
@@ -52,7 +52,7 @@ function Gauge({ value, max, major, redFrom, centerTop, centerMain, centerSub,
       {/* red zone */}
       {redFrom != null && (
         <path d={arcPath(cx, cy, r - 5, START + (redFrom / max) * (END - START), END)}
-          stroke="#ff2a5f" strokeWidth={5} fill="none" strokeLinecap="round" opacity={0.85} style={{filter: 'drop-shadow(0 0 4px #ff2a5f)'}} />
+          stroke="#ff7f50" strokeWidth={5} fill="none" strokeLinecap="round" opacity={0.85} style={{filter: 'drop-shadow(0 0 4px #ff7f50)'}} />
       )}
       {/* progress arc */}
       <path d={arcPath(cx, cy, r - 5, START, angle)}
@@ -64,7 +64,7 @@ function Gauge({ value, max, major, redFrom, centerTop, centerMain, centerSub,
         <line x1={cx} y1={cy + 10} x2={cx} y2={cy - r + 16}
           stroke={accent} strokeWidth={3} strokeLinecap="round" style={{filter: `drop-shadow(0 0 4px ${accent})`}} />
         <line x1={cx} y1={cy + 10} x2={cx} y2={cy + 2}
-          stroke="#ff2a5f" strokeWidth={3} strokeLinecap="round" />
+          stroke="#ff7f50" strokeWidth={3} strokeLinecap="round" />
       </motion.g>
       <circle cx={cx} cy={cy} r={7} fill="#1e293b" stroke={accent} strokeWidth={1.5} />
       {centerTop}
@@ -76,7 +76,7 @@ function Gauge({ value, max, major, redFrom, centerTop, centerMain, centerSub,
 
 function TrafficLamp({ color, on }) {
   return (
-    <div className={`w-6 h-6 rounded-full border ${on ? 'glow-green' : ''}`}
+    <div className={`w-6 h-6 rounded-full border ${on ? 'glow-amber' : ''}`}
       style={{
         background: on ? color : 'rgba(30,41,59,0.9)',
         borderColor: on ? color : 'rgba(100,116,139,0.4)',
@@ -86,9 +86,9 @@ function TrafficLamp({ color, on }) {
 }
 
 const STATE_TEXT = {
-  red: { text: "Please wait — It's Red", color: '#ff2a5f', lamp: '#ff2a5f' },
+  red: { text: "Please wait — It's Red", color: '#ff7f50', lamp: '#ff7f50' },
   yellow: { text: 'Signal changing — hold', color: '#ffb800', lamp: '#ffb800' },
-  green: { text: 'Go — Green now', color: '#00ff88', lamp: '#00ff88' },
+  green: { text: 'Go — Green now', color: '#ffb800', lamp: '#ffb800' },
 }
 
 export default function Cluster({ ego }) {
@@ -124,13 +124,13 @@ export default function Cluster({ ego }) {
       {/* top status bar */}
       <div className="flex items-center justify-between px-5 py-2.5 text-xs text-slate-400 border-b border-slate-800/80">
         <div className="flex items-center gap-3">
-          <Battery size={14} className="text-[#00ff88]" />
+          <Battery size={14} className="text-[#ffb800]" />
           <span className="digits">410 km</span>
-          <Bluetooth size={14} className="text-sky-400" />
+          <orangetooth size={14} className="text-orange-400" />
           <span>CoMIT CV-01 | Connected</span>
         </div>
         <div className="flex items-center gap-3">
-          <SignalIcon size={14} className="text-sky-400" />
+          <SignalIcon size={14} className="text-orange-400" />
           <span className="digits">{clock}</span>
           <Thermometer size={14} /> <span className="digits">+30.5°C</span>
         </div>
@@ -143,8 +143,8 @@ export default function Cluster({ ego }) {
             exit={{ y: -40, opacity: 0 }}
             className="absolute top-12 left-1/2 -translate-x-1/2 z-20">
             <div className="pulse-ring flex items-center gap-2 px-5 py-2.5 rounded-xl
-              bg-red-950/90 border border-[#ff2a5f] text-[#ff2a5f] font-bold text-sm shadow-[0_0_15px_rgba(255,42,95,0.4)]">
-              <TriangleAlert size={16} className="glow-red" />
+              bg-red-950/90 border border-[#ff7f50] text-[#ff7f50] font-bold text-sm shadow-[0_0_15px_rgba(255,127,80,0.4)]">
+              <TriangleAlert size={16} className="glow-coral" />
               AMBULANCE APPROACHING — CLEAR LEFT LANE
             </div>
           </motion.div>
@@ -155,17 +155,17 @@ export default function Cluster({ ego }) {
       <div className="absolute top-16 left-6 z-20 flex flex-col gap-2">
         <div className="bg-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-xl p-3 shadow-lg">
           <div className="flex items-center gap-2 text-xs font-bold uppercase text-slate-400 mb-1">
-            <Coins size={14} className="text-[#00ff88]" />
+            <Coins size={14} className="text-[#ffb800]" />
             Driver Wallet
           </div>
-          <div className="text-2xl font-black digits text-[#00ff88]" style={{ filter: 'drop-shadow(0 0 4px rgba(0,255,136,0.6))' }}>
-            {tokens.toLocaleString()} <span className="text-[10px] text-emerald-500/80">CMT</span>
+          <div className="text-2xl font-black digits text-[#ffb800]" style={{ filter: 'drop-shadow(0 0 4px rgba(255,184,0,0.6))' }}>
+            {tokens.toLocaleString()} <span className="text-[10px] text-amber-500/80">CMT</span>
           </div>
         </div>
         <AnimatePresence>
           {rewarded && (
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}
-              className="bg-emerald-950/80 border border-[#00ff88] rounded-lg p-2 text-[10px] font-bold text-[#00ff88] shadow-[0_0_10px_rgba(0,255,136,0.3)]">
+              className="bg-amber-950/80 border border-[#ffb800] rounded-lg p-2 text-[10px] font-bold text-[#ffb800] shadow-[0_0_10px_rgba(255,184,0,0.3)]">
               +15 CMT: Yielded to Emergency
             </motion.div>
           )}
@@ -185,7 +185,7 @@ export default function Cluster({ ego }) {
               fontFamily="Orbitron" fontWeight={700}>P</text>
           }
           centerSub={
-            <text x={100} y={140} textAnchor="middle" fontSize={9} fill="#00ff88"
+            <text x={100} y={140} textAnchor="middle" fontSize={9} fill="#ffb800"
               fontFamily="Rajdhani" fontWeight={700}>READY</text>
           } />
 
@@ -197,9 +197,9 @@ export default function Cluster({ ego }) {
           </div>
           <div className="flex items-center justify-center gap-3 my-3">
             <div className="flex flex-col gap-1.5 p-1.5 rounded-lg bg-slate-950/70 border border-slate-700/60">
-              <TrafficLamp color="#ff2a5f" on={e.group_state !== 'green'} />
+              <TrafficLamp color="#ff7f50" on={e.group_state !== 'green'} />
               <TrafficLamp color="#ffb800" on={e.group_state === 'yellow'} />
-              <TrafficLamp color="#00ff88" on={e.group_state === 'green'} />
+              <TrafficLamp color="#ffb800" on={e.group_state === 'green'} />
             </div>
             <div className="text-left">
               <div className="font-bold text-base leading-tight" style={{ color: st.color, filter: `drop-shadow(0 0 6px ${st.color})` }}>
@@ -216,20 +216,20 @@ export default function Cluster({ ego }) {
                 initial={{ scale: 1.15, opacity: 0.4 }} animate={{ scale: 1, opacity: 1 }}
                 className="text-center">
                 <div className="text-xs text-slate-400">Green in</div>
-                <div className="digits text-5xl font-black text-sky-300 leading-none my-1" style={{ filter: 'drop-shadow(0 0 6px rgba(56,189,248,0.6))' }}>
+                <div className="digits text-5xl font-black text-orange-300 leading-none my-1" style={{ filter: 'drop-shadow(0 0 6px rgba(56,189,248,0.6))' }}>
                   {Math.ceil(e.time_to_green)}
                 </div>
                 <div className="text-xs text-slate-500">sec</div>
               </motion.div>
             ) : (
               <motion.div key="go" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-                className={`digits text-4xl font-black my-2 text-slate-300`} style={e.group_state === 'green' ? { color: '#00ff88', filter: 'drop-shadow(0 0 8px #00ff88)' } : {}}>
+                className={`digits text-4xl font-black my-2 text-slate-300`} style={e.group_state === 'green' ? { color: '#ffb800', filter: 'drop-shadow(0 0 8px #ffb800)' } : {}}>
                 {passed ? '✓' : 'GO'}
               </motion.div>
             )}
           </AnimatePresence>
           <div className="mt-3 flex items-center justify-center gap-2 text-xs">
-            <span className="px-2.5 py-1 rounded-lg bg-sky-500/15 text-sky-300 border border-sky-500/30 font-semibold shadow-[0_0_8px_rgba(56,189,248,0.3)]">
+            <span className="px-2.5 py-1 rounded-lg bg-orange-500/15 text-orange-300 border border-orange-500/30 font-semibold shadow-[0_0_8px_rgba(56,189,248,0.3)]">
               GLOSA {e.advisory_kmh != null ? `${e.advisory_kmh} km/h` : '—'}
             </span>
             <span className="text-slate-400">{e.advice || 'connecting to SPaT…'}</span>
@@ -264,10 +264,11 @@ export default function Cluster({ ego }) {
           <span className="flex items-center gap-1"><Volume2 size={13} className="text-[#ffb800]" /> voice module armed (EN · தமிழ்)</span>
         </div>
         <div className="flex items-center gap-2">
-          <Radio size={13} className={e.emergency ? 'text-[#ff2a5f] glow-red' : 'text-[#00ff88]'} />
-          <span style={e.emergency ? {color: '#ff2a5f', fontWeight: 'bold'} : {}}>{e.emergency ? 'PREEMPTION ACTIVE' : 'SPaT link live'}</span>
+          <Radio size={13} className={e.emergency ? 'text-[#ff7f50] glow-coral' : 'text-[#ffb800]'} />
+          <span style={e.emergency ? {color: '#ff7f50', fontWeight: 'bold'} : {}}>{e.emergency ? 'PREEMPTION ACTIVE' : 'SPaT link live'}</span>
         </div>
       </div>
     </div>
   )
 }
+

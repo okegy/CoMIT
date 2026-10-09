@@ -8,21 +8,21 @@ function Signal({ x, y, state, label, countdown }) {
     <g transform={`translate(${x},${y})`}>
       <rect x={-15} y={-36} width={30} height={22} rx={6} fill="#060d1a" stroke="#1e3a5f" />
       <circle cx={-7} cy={-25} r={4.2}
-        fill={on.red ? '#ff2a5f' : '#2d0a14'}
-        style={on.red ? { filter: 'drop-shadow(0 0 6px #ff2a5f)' } : {}}
-        className={on.red ? 'glow-red' : ''} />
+        fill={on.red ? '#ff7f50' : '#2d0a14'}
+        style={on.red ? { filter: 'drop-shadow(0 0 6px #ff7f50)' } : {}}
+        className={on.red ? 'glow-coral' : ''} />
       <circle cx={0} cy={-25} r={4.2}
         fill={on.amber ? '#ffb800' : '#2d1f00'}
         style={on.amber ? { filter: 'drop-shadow(0 0 6px #ffb800)' } : {}}
         className={on.amber ? 'glow-amber' : ''} />
       <circle cx={7} cy={-25} r={4.2}
-        fill={on.green ? '#00ff88' : '#001a0e'}
-        style={on.green ? { filter: 'drop-shadow(0 0 6px #00ff88)' } : {}}
-        className={on.green ? 'glow-green' : ''} />
+        fill={on.green ? '#ffb800' : '#001a0e'}
+        style={on.green ? { filter: 'drop-shadow(0 0 6px #ffb800)' } : {}}
+        className={on.green ? 'glow-amber' : ''} />
       <text x={0} y={-2} textAnchor="middle" fontSize={11} fill="#e2e8f0" fontFamily="Rajdhani" fontWeight={700}>{label}</text>
       {on.green && countdown != null &&
-        <text x={0} y={12} textAnchor="middle" fontSize={10} fill="#00ff88" fontFamily="Orbitron"
-          style={{ filter: 'drop-shadow(0 0 4px #00ff88)' }}>{countdown}s</text>}
+        <text x={0} y={12} textAnchor="middle" fontSize={10} fill="#ffb800" fontFamily="Orbitron"
+          style={{ filter: 'drop-shadow(0 0 4px #ffb800)' }}>{countdown}s</text>}
     </g>
   )
 }
@@ -38,7 +38,7 @@ function QueueBar({ x, y, n, dir }) {
           transition={{ delay: i * 0.04 }}
           x={dir === 'h' ? x + i * 12 : x} y={dir === 'h' ? y : y - i * 12}
           width={8} height={8} rx={2}
-          fill={i < 5 ? '#ffb800' : '#ff2a5f'} />
+          fill={i < 5 ? '#ffb800' : '#ff7f50'} />
       ))}
     </g>
   )
@@ -52,18 +52,18 @@ export default function Intersection({ spat, lanes, kpi, emergency, vehicles }) 
   const ped = kpi?.ped_window
   const q = (a) => lanes?.approaches?.[a]?.queue ?? 0
   const blips = vehicles?.vehicles || []
-  const BLIP_COLOR = { car: '#38bdf8', moto: '#ffb800', bus: '#00ff88', truck: '#a3a3a3', amb: '#ff2a5f' }
+  const BLIP_COLOR = { car: '#38bdf8', moto: '#ffb800', bus: '#ffb800', truck: '#a3a3a3', amb: '#ff7f50' }
 
   return (
-    <div className="card h-full flex flex-col border-2 border-sky-500/20">
+    <div className="card h-full flex flex-col border-2 border-orange-500/20">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-sm font-black text-white tracking-wide uppercase">Junction JN-1 · Pondicherry</h2>
         <span className={`text-xs px-2 py-1 rounded-full font-mono font-bold ${
           fallback
             ? 'bg-amber-500/20 text-amber-300 border border-amber-500/60 shadow-[0_0_8px_rgba(255,184,0,0.3)]'
             : spat?.mode === 'EMERGENCY'
-              ? 'bg-red-500/20 text-red-300 border border-red-500/60 shadow-[0_0_8px_rgba(255,42,95,0.4)]'
-              : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/60 shadow-[0_0_8px_rgba(0,255,136,0.3)]'}`}>
+              ? 'bg-red-500/20 text-red-300 border border-red-500/60 shadow-[0_0_8px_rgba(255,127,80,0.4)]'
+              : 'bg-amber-500/20 text-amber-300 border border-amber-500/60 shadow-[0_0_8px_rgba(255,184,0,0.3)]'}`}>
           {spat?.mode || '—'}
         </span>
       </div>
@@ -87,7 +87,7 @@ export default function Intersection({ spat, lanes, kpi, emergency, vehicles }) 
               y1={['N', 'S'].includes(emergency.approach) ? 20 : 170}
               x2={['E', 'W'].includes(emergency.approach) ? 320 : 170}
               y2={['N', 'S'].includes(emergency.approach) ? 320 : 170}
-              stroke="#00ff88" strokeWidth={12} opacity={0.4} className="glow-green"
+              stroke="#ffb800" strokeWidth={12} opacity={0.4} className="glow-amber"
             />
             <motion.circle cx={170} cy={170} r={40} fill="none" stroke="#38bdf8" strokeWidth={2}
               initial={{ r: 40, opacity: 0.8 }} animate={{ r: 150, opacity: 0 }} transition={{ repeat: Infinity, duration: 1.5 }} />
@@ -111,8 +111,8 @@ export default function Intersection({ spat, lanes, kpi, emergency, vehicles }) 
         {/* pedestrian badge */}
         {ped && (
           <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <rect x={139} y={161} width={62} height={18} rx={9} fill="rgba(0,255,136,0.15)" stroke="#00ff88" strokeWidth={1} />
-            <text x={170} y={173.5} textAnchor="middle" fontSize={9.5} fill="#00ff88" fontFamily="Rajdhani" fontWeight={700}>PED CROSS ✓</text>
+            <rect x={139} y={161} width={62} height={18} rx={9} fill="rgba(255,184,0,0.15)" stroke="#ffb800" strokeWidth={1} />
+            <text x={170} y={173.5} textAnchor="middle" fontSize={9.5} fill="#ffb800" fontFamily="Rajdhani" fontWeight={700}>PED CROSS ✓</text>
           </motion.g>
         )}
         {/* queues */}
@@ -134,7 +134,7 @@ export default function Intersection({ spat, lanes, kpi, emergency, vehicles }) 
             fill={BLIP_COLOR[v.t] || '#38bdf8'}
             stroke={v.cv ? '#ffffff' : v.em ? '#fecaca' : 'none'}
             strokeWidth={v.em || v.cv ? 1.5 : 0}
-            className={v.em ? 'glow-red' : ''}>
+            className={v.em ? 'glow-coral' : ''}>
             <animate attributeName="opacity" values="1;1" dur="1s" />
           </motion.circle>
         ))}
@@ -145,7 +145,7 @@ export default function Intersection({ spat, lanes, kpi, emergency, vehicles }) 
         )}
         {/* center countdown */}
         <text x={170} y={169} textAnchor="middle" fontSize={15} fill="#ffffff" fontWeight="bold" fontFamily="Orbitron"
-          style={{ filter: green ? 'drop-shadow(0 0 8px #00ff88)' : 'none' }}>
+          style={{ filter: green ? 'drop-shadow(0 0 8px #ffb800)' : 'none' }}>
           {green ? `${green.min_end_time}s` : '—'}
         </text>
         <text x={170} y={187} textAnchor="middle" fontSize={10} fill="#94a3b8" fontFamily="Rajdhani" fontWeight={600}>
@@ -155,3 +155,4 @@ export default function Intersection({ spat, lanes, kpi, emergency, vehicles }) 
     </div>
   )
 }
+

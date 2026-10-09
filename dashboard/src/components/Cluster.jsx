@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Battery, Signal as SignalIcon, orangetooth, Thermometer, Volume2,
+import { Battery, Signal as SignalIcon, Bluetooth, Thermometer, Volume2,
          Radio, TriangleAlert, Coins } from 'lucide-react'
 
 const polar = (cx, cy, r, deg) => {
@@ -126,7 +126,7 @@ export default function Cluster({ ego }) {
         <div className="flex items-center gap-3">
           <Battery size={14} className="text-[#ffb800]" />
           <span className="digits">410 km</span>
-          <orangetooth size={14} className="text-orange-400" />
+          <Bluetooth size={14} className="text-orange-400" />
           <span>CoMIT CV-01 | Connected</span>
         </div>
         <div className="flex items-center gap-3">
@@ -271,4 +271,5 @@ export default function Cluster({ ego }) {
     </div>
   )
 }
+
 

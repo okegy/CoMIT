@@ -195,9 +195,9 @@ export default function App() {
           {tab === 'nav' && (
             <motion.div key="nav" initial={{ opacity: 0, scale: 0.985 }} animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.99 }} transition={{ duration: 0.35 }} className="space-y-4">
-              <NavMode ego={ego} emergency={emergency} spat={spat} />
+              <NavMode ego={ego} emergency={emergency} spat={spat} hazard={hazard} lanes={lanes} />
               <p className="text-xs text-slate-500 text-center">
-                Dynamic 3D Navigation Mode showing V2V Rerouting simulation. When the system detects an ambulance, your navigation dynamically alerts you to merge left.
+                Real-Time Google Maps Style 3D Navigation with Live Turn-by-Turn, 200m Signal Status Pop-ups, GLOSA Speed Advisories, and Obstacle / Emergency Preemption Alerts.
               </p>
             </motion.div>
           )}

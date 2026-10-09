@@ -9,6 +9,7 @@ import AdminPortal from './components/AdminPortal.jsx'
 import NavMode from './components/NavMode.jsx'
 import CityGrid from './components/CityGrid.jsx'
 import MultiCamStudio from './components/MultiCamStudio.jsx'
+import AiAssistant from './components/AiAssistant.jsx'
 import GlassCursor from './components/GlassCursor.jsx'
 import { KpiCards, QueueChart, EmergencyBanner, VoiceConsole, SafetyPanel, GlosaCard, FleetInspector } from './components/Panels.jsx'
 
@@ -245,6 +246,9 @@ export default function App() {
             <Activity size={13} /> mode: {spat?.mode || '—'} · sim {kpi?.sim_time != null ? Math.floor(kpi.sim_time) : '—'}s
           </span>
         </motion.div>
+
+        {/* Floating AI Chat Assistant Toggle */}
+        <AiAssistant spat={spat} lanes={lanes} kpi={kpi} emergency={emergency} hazard={hazard} onPublish={publish} />
       </div>
     </div>
   )

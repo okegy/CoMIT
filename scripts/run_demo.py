@@ -203,6 +203,8 @@ def main():
                     help="also run the CV edge node on the bundled sample video")
     ap.add_argument("--video", default=None,
                     help="custom video file path or '0' for webcam for real-time AI perception")
+    ap.add_argument("--vision-model", default="yolo11n.pt",
+                    help="path to pretrained YOLO vision weights (e.g. UVH-26, Roboflow Indian Traffic)")
     ap.add_argument("--v2x-latency", type=float, default=0,
                     help="inject N ms latency into outbound V2X messages "
                          "(QA: system must stay safe with 100–500 ms delay)")
@@ -225,9 +227,9 @@ def main():
         cam_src = a.video if a.video is not None else os.path.join(ROOT, "assets", "video", "intersection_street.mp4")
         camera_proc = subprocess.Popen(
             [sys.executable, os.path.join(ROOT, "perception", "multi_camera_streamer.py"),
-             "--source", str(cam_src), "--loop", "--allow-ping"],
+             "--source", str(cam_src), "--model", str(a.vision_model), "--loop", "--allow-ping"],
             stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-        print(f"[demo] multi-camera AI streamer started on source={cam_src} (MJPEG on port 8088)")
+        print(f"[demo] multi-camera AI streamer started on source={cam_src} with model={a.vision_model} (MJPEG on port 8088)")
 
     if a.dashboard:
         npm = shutil.which("npm.cmd") or shutil.which("npm")

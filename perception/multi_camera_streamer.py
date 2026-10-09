@@ -106,7 +106,7 @@ def start_mjpeg_server(port=8088):
 
 
 class MultiCameraVisionEngine:
-    def __init__(self, source, rois=None, broker="localhost", loop=True,
+    def __init__(self, source, model_path="yolo11n.pt", rois=None, broker="localhost", loop=True,
                  allow_ping=True, port=8088):
         self.source = source
         self.rois = rois or DEFAULT_ROIS
@@ -128,9 +128,10 @@ class MultiCameraVisionEngine:
             print(f"[MultiCam] Warning: MQTT connection failed: {e}")
 
         from ultralytics import YOLO
-        print("[MultiCam] Loading YOLO11n AI vision model...")
-        self.model = YOLO("yolo11n.pt")
-        print("[MultiCam] YOLO11n loaded successfully.")
+        print(f"[MultiCam] Loading YOLO AI vision model from {model_path}...")
+        self.model = YOLO(model_path)
+        self.class_names = self.model.names if hasattr(self.model, "names") else VEHICLE_CLASS_NAMES
+        print(f"[MultiCam] Model loaded successfully with {len(self.class_names)} classes.")
 
     def _on_mqtt_message(self, client, userdata, msg):
         try:
@@ -356,6 +357,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--source", default=os.path.join(ROOT, "assets", "video", "intersection_street.mp4"),
                     help="Video file path or '0' for webcam")
+    ap.add_argument("--model", default="yolo11n.pt", help="Path to YOLO model weights (.pt)")
     ap.add_argument("--broker", default="localhost")
     ap.add_argument("--port", type=int, default=8088, help="MJPEG HTTP stream port")
     ap.add_argument("--loop", action="store_true", default=True)
@@ -363,6 +365,6 @@ if __name__ == "__main__":
     args = ap.parse_args()
 
     src = int(args.source) if args.source.isdigit() else args.source
-    engine = MultiCameraVisionEngine(src, broker=args.broker, loop=args.loop,
+    engine = MultiCameraVisionEngine(src, model_path=args.model, broker=args.broker, loop=args.loop,
                                      allow_ping=args.allow_ping, port=args.port)
     engine.run()

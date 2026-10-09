@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import mqtt from 'mqtt'
 
-const URL = import.meta.env.VITE_MQTT_URL || 'ws://localhost:9001'
+const DEFAULT_URL = typeof window !== 'undefined' && window.location.protocol === 'https:'
+  ? 'wss://broker.emqx.io:8084/mqtt'
+  : 'ws://localhost:9001'
+
+const URL = import.meta.env.VITE_MQTT_URL || DEFAULT_URL
 
 export function useMqtt(topics) {
   const clientRef = useRef(null)

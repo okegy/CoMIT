@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Gauge as GaugeIcon, LayoutDashboard, Ambulance, Unplug, Activity, Smartphone, ShieldAlert, Navigation2, Square } from 'lucide-react'
+import { Gauge as GaugeIcon, LayoutDashboard, Ambulance, Unplug, Activity, Smartphone, ShieldAlert, Navigation2, Square, Camera } from 'lucide-react'
 import { useMqtt } from './lib/mqtt'
 import Intersection from './components/Intersection.jsx'
 import Cluster from './components/Cluster.jsx'
@@ -8,12 +8,13 @@ import PriorityApp from './components/PriorityApp.jsx'
 import AdminPortal from './components/AdminPortal.jsx'
 import NavMode from './components/NavMode.jsx'
 import CityGrid from './components/CityGrid.jsx'
+import MultiCamStudio from './components/MultiCamStudio.jsx'
 import GlassCursor from './components/GlassCursor.jsx'
 import { KpiCards, QueueChart, EmergencyBanner, VoiceConsole, SafetyPanel, GlosaCard, FleetInspector } from './components/Panels.jsx'
 
 const TOPICS = ['v2x/spat/jn1', 'v2x/lane_state', 'v2x/alert/emergency',
                 'v2x/alert/voice', 'v2x/kpi', 'v2x/vehicle/ego', 'v2x/alert/hazard',
-                'v2x/vehicles']
+                'v2x/vehicles', 'v2x/perception/multi_cam']
 
 /** Real SHA-256 token — must match core/emergency.py verify_token(). */
 async function emergencyToken(id, secret) {
@@ -106,6 +107,7 @@ export default function App() {
             <nav className="flex gap-1 p-1 rounded-xl bg-slate-900/70 border border-slate-700/50">
               {[
                 { id: 'command', label: lang === 'fr' ? 'Centre de cde' : lang === 'ta' ? 'கட்டளை மையம்' : 'Command Center', icon: LayoutDashboard },
+                { id: 'multicam', label: lang === 'fr' ? 'Studio Multi-Cam' : lang === 'ta' ? 'கேமரா பார்வை' : 'AI Multi-Vision', icon: Camera },
                 { id: 'city', label: lang === 'fr' ? 'Réseau Urbain' : lang === 'ta' ? 'நகர வலையமைப்பு' : 'City Network', icon: Activity },
                 { id: 'cluster', label: lang === 'fr' ? 'Tableau de bord' : lang === 'ta' ? 'வாகனத்தில்' : 'In-Vehicle', icon: GaugeIcon },
                 { id: 'nav', label: lang === 'fr' ? 'Carte de Navigation' : lang === 'ta' ? 'வழிசெலுத்தல்' : 'Navigation Map', icon: Navigation2 },
@@ -161,6 +163,11 @@ export default function App() {
                   <VoiceConsole voice={voice} events={events} spat={spat} />
                 </motion.div>
               </div>
+            </motion.div>
+          ) : tab === 'multicam' ? (
+            <motion.div key="multicam" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }} className="space-y-4">
+              <MultiCamStudio spat={spat} lanes={lanes} emergency={emergency} hazard={hazard} onPublish={publish} />
             </motion.div>
           ) : tab === 'city' ? (
             <motion.div key="city" initial={{ opacity: 0, scale: 0.985 }} animate={{ opacity: 1, scale: 1 }}
@@ -231,8 +238,8 @@ export default function App() {
             <Unplug size={16} /> {lang === 'fr' ? 'Couper les capteurs' : lang === 'ta' ? 'சென்சார் துண்டி' : 'Cut sensor feed (fallback demo)'}
           </button>
           <button onClick={stopSim}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-700/80 hover:bg-red-800 text-white text-sm font-semibold shadow transition-colors border border-slate-600">
-            <Square size={15} /> Stop simulation
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-bold shadow-lg shadow-rose-900/40 transition-all border border-rose-400/50 hover:scale-105 active:scale-95">
+            <Square size={15} className="fill-white" /> Stop Simulation (Off System)
           </button>
           <span className="ml-auto flex items-center gap-1.5 text-xs text-slate-500">
             <Activity size={13} /> mode: {spat?.mode || '—'} · sim {kpi?.sim_time != null ? Math.floor(kpi.sim_time) : '—'}s

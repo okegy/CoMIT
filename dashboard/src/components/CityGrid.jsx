@@ -50,7 +50,7 @@ const CARS = [
   { id: 'c13', path: 'M 775 580 L 775 -40', dur: 34, t: 'truck', warned: false },
   { id: 'c14', path: 'M -40 362 L 1000 362', dur: 35, t: 'auto', warned: true },
 ]
-const CAR_COLOR = { car: '#38bdf8', moto: '#facc15', bus: '#34d399', truck: '#a3a3a3', auto: '#fbbf24' }
+const CAR_COLOR = { car: '#38bdf8', moto: '#ffb800', bus: '#00ff88', truck: '#a3a3a3', auto: '#ffb800' }
 
 const STAGES = [
   { id: 'FEED', icon: Video, label: 'Scenario feed' },
@@ -215,7 +215,7 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
           {/* green corridor overlay */}
           <AnimatePresence>
             {corridorOn && (
-              <motion.path d={ROUTE} fill="none" stroke="#22c55e" strokeWidth={18}
+              <motion.path d={ROUTE} fill="none" stroke="#00ff88" strokeWidth={18}
                 strokeLinecap="round" opacity={0.28}
                 initial={{ pathLength: 0 }} animate={{ pathLength: progress || 0.001 }}
                 transition={{ duration: 0.2 }} />
@@ -228,7 +228,7 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
             return (
               <g key={j.id}>
                 <rect x={j.x - 30} y={j.y - 30} width={60} height={60} rx={8} fill="#1c2b45" stroke="#2b3d5c" />
-                <circle cx={j.x} cy={j.y} r={7} fill={g === 'green' ? '#22c55e' : '#ef4444'}
+                <circle cx={j.x} cy={j.y} r={7} fill={g === 'green' ? '#00ff88' : '#ff2a5f'}
                   filter="url(#glow)" className={g === 'green' ? 'glow-green' : ''} />
                 <text x={j.x} y={j.y + 46} textAnchor="middle" fontSize={10} fill="#64748b" fontFamily="Rajdhani" fontWeight={700}>
                   {j.id}
@@ -250,10 +250,10 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
 
           {/* hospital */}
           <g transform={`translate(${HOSPITAL.x - 34}, ${HOSPITAL.y - 22})`}>
-            <rect width={68} height={44} rx={8} fill="#0f2a1e" stroke="#22c55e" strokeWidth={1.5} />
+            <rect width={68} height={44} rx={8} fill="#0f2a1e" stroke="#00ff88" strokeWidth={1.5} />
             <path d="M 26 12 h 16 v 8 h 8 v 16 h -8 v 8 ... " display="none" />
-            <text x={34} y={27} textAnchor="middle" fill="#4ade80" fontSize={18} fontWeight="bold">✚</text>
-            <text x={34} y={39} textAnchor="middle" fill="#4ade80" fontSize={8} fontFamily="Rajdhani" fontWeight={700}>HOSPITAL</text>
+            <text x={34} y={27} textAnchor="middle" fill="#00ff88" fontSize={18} fontWeight="bold">✚</text>
+            <text x={34} y={39} textAnchor="middle" fill="#00ff88" fontSize={8} fontFamily="Rajdhani" fontWeight={700}>HOSPITAL</text>
           </g>
 
           {/* civilian vehicles */}
@@ -275,7 +275,7 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
                 {c.warned && warnedActive && (
                   <g transform="translate(7, -10)">
                     <circle r={6} fill="#78350f" stroke="#f59e0b" strokeWidth={1} />
-                    <text y={2.5} textAnchor="middle" fontSize={8} fill="#fbbf24">⚠</text>
+                    <text y={2.5} textAnchor="middle" fontSize={8} fill="#ffb800">⚠</text>
                   </g>
                 )}
               </g>
@@ -307,9 +307,9 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
                 animate={{ x: ambPos[0], y: ambPos[1] }}
                 transition={{ type: 'tween', duration: 0.12, ease: 'linear' }}
                 exit={{ opacity: 0 }}>
-                <motion.circle r={16} fill="rgba(239,68,68,0.25)" stroke="#ef4444" strokeWidth={1.5}
+                <motion.circle r={16} fill="rgba(255,42,95,0.25)" stroke="#ff2a5f" strokeWidth={1.5}
                   animate={{ r: [12, 20, 12] }} transition={{ repeat: Infinity, duration: 0.8 }} />
-                <rect x={-7} y={-12} width={14} height={24} rx={3} fill="#ef4444" stroke="#fecaca" strokeWidth={1} />
+                <rect x={-7} y={-12} width={14} height={24} rx={3} fill="#ff2a5f" stroke="#fecaca" strokeWidth={1} />
                 <rect x={-5} y={-7} width={10} height={14} rx={1.5} fill="white" />
                 <motion.circle cy={-10} r={2.5} fill="#38bdf8"
                   animate={{ opacity: [1, 0.2, 1] }} transition={{ repeat: Infinity, duration: 0.35 }} />
@@ -329,11 +329,11 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
               </g>
             ))}
             <g transform="translate(380, 0)">
-              <rect x={0} y={-7} width={9} height={14} rx={2} fill="#ef4444" />
+              <rect x={0} y={-7} width={9} height={14} rx={2} fill="#ff2a5f" />
               <text x={14} y={4} fill="#94a3b8" fontWeight={600}>ambulance</text>
             </g>
             <g transform="translate(490, 0)">
-              <line x1={0} y1={-5} x2={22} y2={-5} stroke="#22c55e" strokeWidth={5} strokeLinecap="round" opacity={0.5} />
+              <line x1={0} y1={-5} x2={22} y2={-5} stroke="#00ff88" strokeWidth={5} strokeLinecap="round" opacity={0.5} />
               <text x={28} y={0} fill="#94a3b8" fontWeight={600}>green corridor</text>
             </g>
           </g>
@@ -365,3 +365,4 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
     </div>
   )
 }
+

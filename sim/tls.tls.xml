@@ -1,0 +1,36 @@
+<tls>
+    <!-- CoMIT program: 4 green phases with yellow + all-red between.
+         Green indices: 0 (NS through+right), 3 (NS left), 6 (EW through+right), 9 (EW left).
+         Link order = linkIndex assigned in connections.con.xml:
+         0 N-thr, 1 N-r, 2 S-thr, 3 S-r, 4 E-thr, 5 E-r, 6 W-thr, 7 W-r, 8 N-l, 9 S-l, 10 E-l, 11 W-l -->
+    <tlLogic id="J" type="static" programID="comit" offset="0">
+        <phase duration="20" state="GGGGrrrrrrrr"/>   <!-- 0 g0: NS through+right -->
+        <phase duration="3"  state="yyyyrrrrrrrr"/>   <!-- 1 y0 -->
+        <phase duration="3"  state="rrrrrrrrrrrr"/>   <!-- 2 all-red (ped clearance) -->
+        <phase duration="12" state="rrrrrrrrGGrr"/>   <!-- 3 g1: NS left -->
+        <phase duration="3"  state="rrrrrrrryyrr"/>   <!-- 4 y1 -->
+        <phase duration="3"  state="rrrrrrrrrrrr"/>   <!-- 5 all-red -->
+        <phase duration="20" state="rrrrGGGGrrrr"/>   <!-- 6 g2: EW through+right -->
+        <phase duration="3"  state="rrrryyyyrrrr"/>   <!-- 7 y2 -->
+        <phase duration="3"  state="rrrrrrrrrrrr"/>   <!-- 8 all-red -->
+        <phase duration="12" state="rrrrrrrrrrGG"/>   <!-- 9 g3: EW left -->
+        <phase duration="3"  state="rrrrrrrrrryy"/>   <!-- 10 y3 -->
+        <phase duration="3"  state="rrrrrrrrrrrr"/>   <!-- 11 all-red -->
+    </tlLogic>
+
+    <!-- Fixed-time fallback program (same structure, fixed cycle) -->
+    <tlLogic id="J" type="static" programID="comit_fixed" offset="0">
+        <phase duration="25" state="GGGGrrrrrrrr"/>
+        <phase duration="3"  state="yyyyrrrrrrrr"/>
+        <phase duration="3"  state="rrrrrrrrrrrr"/>
+        <phase duration="12" state="rrrrrrrrGGrr"/>
+        <phase duration="3"  state="rrrrrrrryyrr"/>
+        <phase duration="3"  state="rrrrrrrrrrrr"/>
+        <phase duration="25" state="rrrrGGGGrrrr"/>
+        <phase duration="3"  state="rrrryyyyrrrr"/>
+        <phase duration="3"  state="rrrrrrrrrrrr"/>
+        <phase duration="12" state="rrrrrrrrrrGG"/>
+        <phase duration="3"  state="rrrrrrrrrryy"/>
+        <phase duration="3"  state="rrrrrrrrrrrr"/>
+    </tlLogic>
+</tls>

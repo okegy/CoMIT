@@ -1,0 +1,28 @@
+name: CoMIT CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  safety-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install core deps (SUMO + safety stack)
+        run: |
+          pip install eclipse-sumo traci sumolib gymnasium numpy
+      - name: SafetyChecker unit tests (12 invariants)
+        run: python scripts/test_safety.py
+      - name: Safety fuzz — 300 adversarial actions + token auth
+        run: python scripts/test_qa.py
+      - name: Compile-check all modules
+        run: |
+          python -m py_compile core/env.py core/safety_checker.py core/emergency.py \
+            core/fusion.py v2x/spat_publisher.py v2x/glosa.py train/train_ppo.py \
+            train/evaluate.py scripts/run_demo.py sim/generate_routes.py

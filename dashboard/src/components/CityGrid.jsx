@@ -222,7 +222,7 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat, publish }) 
           {/* green corridor overlay */}
           <AnimatePresence>
             {corridorOn && (
-              <motion.path d={ROUTE} fill="none" stroke="#ffb800" strokeWidth={18}
+              <motion.path d={ROUTE} fill="none" stroke="#22c55e" strokeWidth={18}
                 strokeLinecap="round" opacity={0.28}
                 initial={{ pathLength: 0 }} animate={{ pathLength: progress || 0.001 }}
                 transition={{ duration: 0.2 }} />
@@ -235,8 +235,8 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat, publish }) 
             return (
               <g key={j.id}>
                 <rect x={j.x - 30} y={j.y - 30} width={60} height={60} rx={8} fill="#1c2b45" stroke="#2b3d5c" />
-                <circle cx={j.x} cy={j.y} r={7} fill={g === 'green' ? '#ffb800' : '#ff7f50'}
-                  filter="url(#glow)" className={g === 'green' ? 'glow-amber' : ''} />
+                <circle cx={j.x} cy={j.y} r={7} fill={g === 'green' ? '#22c55e' : '#ef4444'}
+                  filter="url(#glow)" className={g === 'green' ? 'glow-green' : 'glow-red'} />
                 <text x={j.x} y={j.y + 46} textAnchor="middle" fontSize={10} fill="#64748b" fontFamily="Rajdhani" fontWeight={700}>
                   {j.id}
                 </text>
@@ -372,6 +372,7 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat, publish }) 
     </div>
   )
 }
+
 
 
 

@@ -143,9 +143,9 @@ body {
   font-weight: 800;
 }
 
-/* Coral + Amber Signal Glows */
+/* Traffic Signal Glows */
 .glow-signal-green {
-  filter: drop-shadow(0 0 10px rgba(255, 184, 0, 0.90));
+  filter: drop-shadow(0 0 12px rgba(34, 197, 94, 1.00));
 }
 .glow-signal-yellow {
   filter: drop-shadow(0 0 10px rgba(255, 184, 0, 0.90));
@@ -160,13 +160,13 @@ body {
   filter: drop-shadow(0 0 10px rgba(255, 127, 80, 0.92));
 }
 .glow-signal-red {
-  filter: drop-shadow(0 0 12px rgba(255, 127, 80, 1.00));
+  filter: drop-shadow(0 0 12px rgba(239, 68, 68, 1.00));
 }
 .glow-green {
-  filter: drop-shadow(0 0 8px rgba(255, 184, 0, 0.85));
+  filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.90));
 }
 .glow-red {
-  filter: drop-shadow(0 0 10px rgba(255, 127, 80, 0.92));
+  filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.92));
 }
 
 /* Custom smooth scrollbar - Coral tint */

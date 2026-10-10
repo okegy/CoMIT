@@ -16,13 +16,13 @@ function Signal({ x, y, state, label, countdown }) {
         style={on.amber ? { filter: 'drop-shadow(0 0 6px #ffb800)' } : {}}
         className={on.amber ? 'glow-amber' : ''} />
       <circle cx={7} cy={-25} r={4.2}
-        fill={on.green ? '#ffb800' : '#001a0e'}
-        style={on.green ? { filter: 'drop-shadow(0 0 6px #ffb800)' } : {}}
-        className={on.green ? 'glow-amber' : ''} />
+        fill={on.green ? '#22c55e' : '#001a0e'}
+        style={on.green ? { filter: 'drop-shadow(0 0 6px #22c55e)' } : {}}
+        className={on.green ? 'glow-green' : ''} />
       <text x={0} y={-2} textAnchor="middle" fontSize={11} fill="#e2e8f0" fontFamily="Rajdhani" fontWeight={700}>{label}</text>
       {on.green && countdown != null &&
-        <text x={0} y={12} textAnchor="middle" fontSize={10} fill="#ffb800" fontFamily="Orbitron"
-          style={{ filter: 'drop-shadow(0 0 4px #ffb800)' }}>{countdown}s</text>}
+        <text x={0} y={12} textAnchor="middle" fontSize={10} fill="#22c55e" fontFamily="Orbitron"
+          style={{ filter: 'drop-shadow(0 0 4px #22c55e)' }}>{countdown}s</text>}
     </g>
   )
 }
@@ -155,4 +155,5 @@ export default function Intersection({ spat, lanes, kpi, emergency, vehicles }) 
     </div>
   )
 }
+
 

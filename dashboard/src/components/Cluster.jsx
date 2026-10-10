@@ -199,7 +199,7 @@ export default function Cluster({ ego }) {
             <div className="flex flex-col gap-1.5 p-1.5 rounded-lg bg-slate-950/70 border border-slate-700/60">
               <TrafficLamp color="#ff7f50" on={e.group_state !== 'green'} />
               <TrafficLamp color="#ffb800" on={e.group_state === 'yellow'} />
-              <TrafficLamp color="#ffb800" on={e.group_state === 'green'} />
+              <TrafficLamp color="#22c55e" on={e.group_state === 'green'} />
             </div>
             <div className="text-left">
               <div className="font-bold text-base leading-tight" style={{ color: st.color, filter: `drop-shadow(0 0 6px ${st.color})` }}>
@@ -223,7 +223,7 @@ export default function Cluster({ ego }) {
               </motion.div>
             ) : (
               <motion.div key="go" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-                className={`digits text-4xl font-black my-2 text-slate-300`} style={e.group_state === 'green' ? { color: '#ffb800', filter: 'drop-shadow(0 0 8px #ffb800)' } : {}}>
+                className={`digits text-4xl font-black my-2 text-slate-300`} style={e.group_state === 'green' ? { color: '#22c55e', filter: 'drop-shadow(0 0 8px #22c55e)' } : {}}>
                 {passed ? '✓' : 'GO'}
               </motion.div>
             )}
@@ -271,5 +271,6 @@ export default function Cluster({ ego }) {
     </div>
   )
 }
+
 
 

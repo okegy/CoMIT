@@ -10,6 +10,7 @@ import NavMode from './components/NavMode.jsx'
 import CityGrid from './components/CityGrid.jsx'
 import MultiCamStudio from './components/MultiCamStudio.jsx'
 import AiAssistant from './components/AiAssistant.jsx'
+import ClickParticles from './components/ClickParticles.jsx'
 import GlassCursor from './components/GlassCursor.jsx'
 import { KpiCards, QueueChart, EmergencyBanner, VoiceConsole, SafetyPanel, GlosaCard, FleetInspector } from './components/Panels.jsx'
 
@@ -268,5 +269,6 @@ export default function App() {
     </div>
   )
 }
+
 
 

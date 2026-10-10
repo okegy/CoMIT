@@ -49,7 +49,7 @@ def sha16(s):
 
 
 class VisionNode:
-    def __init__(self, source, rois=None, show=False, broker="broker.emqx.io",
+    def __init__(self, source, rois=None, show=False, broker="localhost",
                  loop=False, snapshot=None, allow_ping=False, ping_once=True):
         self.source = source
         self.rois = rois or DEFAULT_ROIS
@@ -202,7 +202,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--source", required=True, help="video path, '0' for webcam, or RTSP URL")
     ap.add_argument("--show", action="store_true")
-    ap.add_argument("--broker", default="broker.emqx.io")
+    ap.add_argument("--broker", default="localhost")
     ap.add_argument("--loop", action="store_true", help="loop the video file")
     ap.add_argument("--snapshot", default=None, help="save one annotated frame to this path")
     ap.add_argument("--allow-ping", action="store_true",
@@ -211,4 +211,5 @@ if __name__ == "__main__":
     src = int(a.source) if a.source.isdigit() else a.source
     VisionNode(src, show=a.show, broker=a.broker, loop=a.loop,
                snapshot=a.snapshot, allow_ping=a.allow_ping).run()
+
 

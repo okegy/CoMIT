@@ -57,6 +57,7 @@ CoMIT provides real-time voice prompts in both **English** and **Tamil (தம�
 ]
 
 export default function AiAssistant({ spat, lanes, kpi, emergency, hazard, onPublish }) {
+  const [dismissed, setDismissed] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState([
@@ -140,28 +141,42 @@ Try asking:
   return (
     <>
       {/* Floating AI Chat Trigger Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <motion.button
-          onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.94 }}
-          className="relative group p-3.5 rounded-full bg-gradient-to-r from-orange-500 via-orange-600 to-rose-600 text-white shadow-2xl shadow-orange-500/40 border border-orange-300/40 flex items-center justify-center cursor-pointer"
-        >
-          {isOpen ? (
-            <X size={24} />
-          ) : (
-            <>
-              <Bot size={24} className="animate-pulse" />
-              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-amber-400 border-2 border-slate-900" />
-            </>
-          )}
+      {!dismissed && (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2">
+          <motion.button
+            onClick={() => setIsOpen(!isOpen)}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.94 }}
+            className="relative group p-3.5 rounded-full bg-gradient-to-r from-orange-500 via-orange-600 to-rose-600 text-white shadow-2xl shadow-orange-500/40 border border-orange-300/40 flex items-center justify-center cursor-pointer"
+          >
+            {isOpen ? (
+              <X size={24} />
+            ) : (
+              <>
+                <Bot size={24} className="animate-pulse" />
+                <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-amber-400 border-2 border-slate-900" />
+              </>
+            )}
+            {!isOpen && (
+              <span className="absolute right-14 whitespace-nowrap bg-slate-900/90 backdrop-blur text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-700/80 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl flex items-center gap-1.5">
+                <Sparkles size={13} className="text-orange-400" /> Ask CoMIT AI Copilot
+              </span>
+            )}
+          </motion.button>
           {!isOpen && (
-            <span className="absolute right-14 whitespace-nowrap bg-slate-900/90 backdrop-blur text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-700/80 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl flex items-center gap-1.5">
-              <Sparkles size={13} className="text-orange-400" /> Ask CoMIT AI Copilot
-            </span>
+            <button
+              onClick={() => {
+                setDismissed(true)
+                if ('speechSynthesis' in window) window.speechSynthesis.cancel()
+              }}
+              className="p-2 rounded-full bg-slate-900/90 hover:bg-red-500/20 text-slate-400 hover:text-red-300 border border-slate-700/80 transition-all cursor-pointer shadow-lg"
+              title="Close Voice Agent Widget"
+            >
+              <X size={14} />
+            </button>
           )}
-        </motion.button>
-      </div>
+        </div>
+      )}
 
       {/* Floating Glassmorphic AI Chat Drawer Modal */}
       <AnimatePresence>
@@ -192,10 +207,14 @@ Try asking:
                 </div>
               </div>
               <button
-                onClick={() => setIsOpen(false)}
-                className="w-8 h-8 rounded-lg bg-slate-800/60 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+                onClick={() => {
+                  setIsOpen(false)
+                  if ('speechSynthesis' in window) window.speechSynthesis.cancel()
+                }}
+                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-red-500/20 hover:bg-red-500/40 text-red-300 border border-red-500/40 text-xs font-bold transition-all cursor-pointer"
+                title="Close Voice Agent"
               >
-                <ChevronDown size={18} />
+                <X size={15} /> Close
               </button>
             </div>
 
@@ -287,4 +306,6 @@ Try asking:
     </>
   )
 }
+
+
 

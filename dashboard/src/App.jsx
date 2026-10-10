@@ -188,7 +188,7 @@ export default function App() {
           ) : tab === 'city' ? (
             <motion.div key="city" initial={{ opacity: 0, scale: 0.985 }} animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.99 }} transition={{ duration: 0.35 }} className="space-y-4">
-              <CityGrid emergency={emergency} onFeedAmbulance={sendPing} spat={spat} />
+              <CityGrid emergency={emergency} onFeedAmbulance={sendPing} spat={spat} publish={publish} />
             </motion.div>
           ) : tab === 'cluster' ? (
             <motion.div key="cluster" initial={{ opacity: 0, scale: 0.985 }} animate={{ opacity: 1, scale: 1 }}
@@ -269,6 +269,7 @@ export default function App() {
     </div>
   )
 }
+
 
 
 

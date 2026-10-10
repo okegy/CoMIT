@@ -312,7 +312,7 @@ def main():
         return 0
 
     obs, _ = env.reset(seed=2026)
-    sp.publish_voice(("welcome", "welcome"), cooldown_key="welcome")
+    sp.publish_voice(("welcome_en", "welcome_ta"), cooldown_key="welcome")
 
     lane_lengths = {}
     impact = {"co2_saved_g": 0.0, "last_t": 0.0}
@@ -428,7 +428,7 @@ def main():
             "reason": dec.reason, "fallback": fallback})
         if fallback and not state["fallback_announced"]:
             state["fallback_announced"] = True
-            sp.publish_voice(("fallback", "fallback"), cooldown_key="fallback1")
+            sp.publish_voice(("fallback_en", "fallback_ta"), cooldown_key="fallback1")
         if not fallback:
             state["fallback_announced"] = False
         # voice: red signal ~10 s ahead for the retrofit module
@@ -436,7 +436,7 @@ def main():
         if (phase_state == "green" and 0 < green_left <= 10
                 and state["voice_phase"] != env._green_start):
             state["voice_phase"] = env._green_start
-            sp.publish_voice(("red_in_10", "red_in_10"),
+            sp.publish_voice(("red_in_10_en", "red_in_10_ta"),
                              cooldown_key=f"red{env._green_start}")
 
     m = env.episode_metrics
@@ -453,3 +453,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

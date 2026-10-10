@@ -59,7 +59,7 @@ const STAGES = [
   { id: 'BROADCAST', icon: Wifi, label: 'SPaT / V2X' },
 ]
 
-export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
+export default function CityGrid({ emergency, onFeedAmbulance, spat, publish }) {
   const [amb, setAmb] = useState(null)          // {start: ts}
   const [progress, setProgress] = useState(0)
   const [hazard, setHazard] = useState(null)    // {type, x, y, label}
@@ -68,7 +68,13 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
   const animRef = useRef({ t0: 0, dur: 12000 })
   const liveMode = emergency?.event === 'PREEMPT' || emergency?.event === 'ping_accepted'
 
-  // ---------------- ambulance run loop (12s across the corridor) ------------
+    // ---------------- ambulance run loop (12s across the corridor) ------------
+  useEffect(() => {
+    if (liveMode && !amb) {
+      setAmb({ start: Date.now() })
+    }
+  }, [liveMode, amb])
+
   useEffect(() => {
     if (!amb) { setProgress(0); return }
     const tick = (ts) => {
@@ -90,12 +96,13 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
     // drive the REAL pipeline too (trained model + safety checker)
     onFeedAmbulance?.()
   }
-  const feedHazard = (type) => {
+    const feedHazard = (type) => {
     const spots = {
-      construction: { x: 620, y: 370, label: 'ROAD WORKS â€” RIGHT LANE CLOSED' },
-      pothole: { x: 330, y: 170, label: 'SEVERE POTHOLE â€” CENTER LANE' },
+      construction: { x: 620, y: 370, label: 'ROAD WORKS — RIGHT LANE CLOSED' },
+      pothole: { x: 330, y: 170, label: 'SEVERE POTHOLE — CENTER LANE' },
     }
     setHazard({ type, ...spots[type] })
+    if (publish) publish('v2x/alert/hazard', JSON.stringify({ type, approach: 'W_E' }))
     setTimeout(() => setHazard(null), 9000)
   }
 
@@ -365,5 +372,7 @@ export default function CityGrid({ emergency, onFeedAmbulance, spat }) {
     </div>
   )
 }
+
+
 
 

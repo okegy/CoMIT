@@ -132,17 +132,60 @@ export function EmergencyBanner({ emergency, hazard }) {
   )
 }
 
-export function VoiceConsole({ voice, events, spat }) {
+// Nav speech text per language
+const NAV_TEXT = {
+  en: 'Turn right onto Anna Salai in 400 meters. Maintain 40 kilometres per hour for Green Light Optimal Speed Advisory.',
+  fr: 'Tournez à droite sur Anna Salai dans 400 mètres. Maintenez 40 kilomètres par heure pour le guidage de vitesse optimale.',
+  ta: 'அண்ணா சாலையில் 400 மீட்டர் தூரத்தில் வலதுபுறம் திரும்பவும். பசுமை விளக்கு வேக வழிகாட்டிக்காக மணிக்கு 40 கிலோமீட்டர் வேகத்தை பராமரிக்கவும்.',
+}
+const LANG_ANNOUNCE = {
+  en: 'Language switched to English. Voice alerts will now play in English.',
+  fr: 'Langue changée en Français. Les alertes vocales seront désormais en Français.',
+  ta: 'மொழி தமிழுக்கு மாற்றப்பட்டது. குரல் எச்சரிக்கைகள் இனி தமிழில் இயங்கும்.',
+}
+const LANG_LOCALE = { en: 'en-US', fr: 'fr-FR', ta: 'ta-IN' }
+const LANG_LABEL  = { en: 'English', fr: 'Français', ta: 'தமிழ்' }
+
+export function VoiceConsole({ voice, events, spat, lang = 'en' }) {
   const [enabled, setEnabled] = useState(true)
-  const [playing, setPlaying] = useState(false)
-  const audioRef = useRef(null)
+  const prevLang = useRef(lang)
+  const prevVoice = useRef(null)
+
+  const speak = (text, locale) => {
+    if (!('speechSynthesis' in window)) return
+    window.speechSynthesis.cancel()
+    const utt = new SpeechSynthesisUtterance(text)
+    utt.lang = locale
+    utt.rate = 1.05
+    const voices = window.speechSynthesis.getVoices()
+    const match = voices.find(v => v.lang.startsWith(locale.split('-')[0]))
+    if (match) utt.voice = match
+    window.speechSynthesis.speak(utt)
+  }
+
+  // ── Auto-announce + play audio when language switches ─────────────────
+  useEffect(() => {
+    if (prevLang.current === lang) return
+    prevLang.current = lang
+    if (!enabled) return
+    speak(LANG_ANNOUNCE[lang] || LANG_ANNOUNCE.en, LANG_LOCALE[lang] || 'en-US')
+    // also play the welcome MP3 in the new language if available
+    const src = lang === 'ta' ? 'audio/welcome_ta.mp3' : 'audio/welcome_en.mp3'
+    setTimeout(() => new Audio(src).play().catch(() => {}), 1200)
+  }, [lang, enabled])
+
+  // ── Auto-play incoming MQTT voice alert in the active language ─────────
+  useEffect(() => {
+    if (!voice || !enabled) return
+    if (prevVoice.current === voice) return
+    prevVoice.current = voice
+    const src = lang === 'ta' ? voice.ta : voice.en
+    if (src) new Audio(src).play().catch(() => {})
+  }, [voice, lang, enabled])
 
   const speakNav = () => {
-    if (!('speechSynthesis' in window)) return
-    const text = 'Turn right onto Anna Salai in 400 meters. Maintain 40 km/h for Green Light Optimal Speed Advisory.'
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.rate = 1.0
-    window.speechSynthesis.speak(utterance)
+    if (!enabled) return
+    speak(NAV_TEXT[lang] || NAV_TEXT.en, LANG_LOCALE[lang] || 'en-US')
   }
 
   return (
@@ -150,36 +193,41 @@ export function VoiceConsole({ voice, events, spat }) {
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
           <Volume2 className="text-amber-400" size={15} />
-          Retrofit Voice Module (EN + தமிழ்)
+          Voice Module · <span className="text-amber-300">{LANG_LABEL[lang]}</span>
         </h3>
-        <div className="flex items-center gap-2">
-          <button onClick={() => setEnabled(e => !e)}
-            className={`flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg border transition-all ${enabled ? 'bg-amber-500/20 text-amber-300 border-amber-500/40' : 'bg-slate-800 text-slate-400 border-slate-700'}`}>
-            {enabled ? <Volume2 size={12} /> : <VolumeX size={12} />} {enabled ? 'AUDIO ON' : 'MUTED'}
-          </button>
-        </div>
+        <button onClick={() => setEnabled(e => !e)}
+          className={`flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg border transition-all ${enabled ? 'bg-amber-500/20 text-amber-300 border-amber-500/40' : 'bg-slate-800 text-slate-400 border-slate-700'}`}>
+          {enabled ? <Volume2 size={12} /> : <VolumeX size={12} />} {enabled ? 'ON' : 'MUTED'}
+        </button>
+      </div>
+
+      {/* Active language indicator */}
+      <div className="mb-2 flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/25 text-[11px]">
+        <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+        <span className="text-amber-200 font-bold">Active: {LANG_LABEL[lang]}</span>
+        <span className="text-slate-500 ml-auto text-[10px]">switch lang → auto-plays</span>
       </div>
 
       {voice && (
         <div className="mb-2 p-2.5 rounded-xl bg-slate-900/90 border border-slate-700">
           <div className="text-[10px] uppercase font-bold text-slate-400 mb-1.5">Manual Trigger Alerts</div>
           <div className="flex gap-2">
-            <button onClick={() => new Audio(voice.ta).play().catch(() => {})}
+            <button onClick={() => { if (enabled) new Audio(voice.ta).play().catch(() => {}) }}
               className="flex-1 text-xs py-1.5 rounded-lg bg-amber-500/20 text-amber-200 hover:bg-amber-500/30 border border-amber-500/40 font-bold transition-all cursor-pointer">
               தமிழ் ▶
             </button>
-            <button onClick={() => new Audio(voice.en).play().catch(() => {})}
+            <button onClick={() => { if (enabled) new Audio(voice.en).play().catch(() => {}) }}
               className="flex-1 text-xs py-1.5 rounded-lg bg-orange-500/20 text-orange-200 hover:bg-orange-500/30 border border-orange-500/40 font-bold transition-all cursor-pointer">
               English ▶
             </button>
           </div>
         </div>
       )}
-      
+
       <div className="mb-2">
         <button onClick={speakNav}
           className="w-full flex items-center justify-center gap-2 text-xs py-2 rounded-xl bg-gradient-to-r from-rose-600 to-rose-600 hover:from-rose-500 hover:to-rose-500 text-white border border-rose-400 shadow-lg shadow-rose-900/30 font-black uppercase tracking-wider transition-all cursor-pointer">
-          <Zap size={14} /> Synthesize Sync Nav Audio
+          <Zap size={14} /> Speak Nav in {LANG_LABEL[lang]}
         </button>
       </div>
 

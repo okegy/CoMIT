@@ -176,7 +176,7 @@ export default function App() {
                 </motion.div>
                 <motion.div className="space-y-4" variants={fadeUp} initial="hidden" animate="show" custom={4}>
                   <GlosaCard spat={spat} />
-                  <VoiceConsole voice={voice} events={events} spat={spat} />
+                  <VoiceConsole voice={voice} events={events} spat={spat} lang={lang} />
                 </motion.div>
               </div>
             </motion.div>
@@ -199,7 +199,7 @@ export default function App() {
                   <QueueChart lanes={lanes} />
                 </motion.div>
                 <motion.div variants={fadeUp} initial="hidden" animate="show" custom={2}>
-                  <VoiceConsole voice={voice} events={events} spat={spat} />
+                  <VoiceConsole voice={voice} events={events} spat={spat} lang={lang} />
                 </motion.div>
               </div>
               <p className="text-xs text-slate-500 text-center">
@@ -225,7 +225,7 @@ export default function App() {
                   onPing={sendPing} tokenReady={!!token} />
                 <div className="space-y-4">
                   <QueueChart lanes={lanes} />
-                  <VoiceConsole voice={voice} events={events} spat={spat} />
+                  <VoiceConsole voice={voice} events={events} spat={spat} lang={lang} />
                 </div>
               </div>
               <p className="text-xs text-slate-500 text-center">
@@ -269,6 +269,7 @@ export default function App() {
     </div>
   )
 }
+
 
 
 
